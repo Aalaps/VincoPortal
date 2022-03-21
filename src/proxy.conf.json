@@ -1,7 +1,7 @@
 
 {
     "/api/*": {
-        "target": "http://vincodev.azurewebsites.net/api/auth/login",
+        "target": "https://vincodev.azurewebsites.net/api/auth/login",
         "secure": false,
         "logLevel": "debug"
     }
