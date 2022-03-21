@@ -1,0 +1,8 @@
+.cen{
+    display: flex;
+    justify-content: center;
+}
+.page{
+    display: flex;
+    justify-content: flex-end;
+}

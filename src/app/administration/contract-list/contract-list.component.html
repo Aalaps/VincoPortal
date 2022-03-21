@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sidebar 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav class="sidebar" id="sidebar">
+            <div class="p-4 pt-5">
+
+                <ul class="list-unstyled components mb-5 " style="padding-top: 60px;">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Dashboard</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#"><b>Dashboard</b></a>
+                            </li>
+                            <li>
+                                <a href="#">Contract List</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Contract List</a>
+                    </li>
+
+                </ul>
+
+
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg_light_1" style="margin-top: 40px; margin-bottom: -49px;">
+                <div class="container-fluid">
+
+                    <button (click)="f()" type="button" id="sidebarCollapse" class="btn btn-primary"  style="margin-left: 30px;">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div  style="padding-left: 15px;padding-top: 5px;">
+                        <h2 style="color: white;"><b><i>V&nbsp;I&nbsp;N&nbsp;C&nbsp;<i class="fa fa-cog" style="color: white;" aria-hidden="true"></i></i></b></h2>
+                        <!-- <img style="color: aliceblue;" width="200" height="60" src="https://images.squarespace-cdn.com/content/v1/5a6f9a73a803bb2b342aaf85/1520969818547-OHA9RGWBBRGIVF4XKVG9/VINCOLOGO_WHTonBLK.png" /> -->
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link navbar-brand text-light">Welcome : {{userName}} </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="btn nav-link btn-link text-light navbar-brand" (click)="Logout()">Logout</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="container-fluid mt-5" style="margin-left: 40px;text-align: center;" *ngIf="contractData.length != 0">
+                <table class="table table-responsive" style="width:100% ;">
+                    <thead>
+                        <tr class="text-center" style="background-color: gray;">
+                            <th>Name</th>
+                            <th>Signed Dates</th>
+                            <th>Billing Date</th>
+                            <th>MRC</th>
+                            <th>Term(Months)</th>
+                            <th>Supplier</th>
+                            <!-- <th>Company</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contract of contractData  | paginate : {
+                                itemsPerPage: pageSize,
+                                currentPage: page,
+                                totalItems: count
+                            };let i=index;" class="text-center hov" (click)="goToUpdatePage(contract.id)">
+                            <td > {{contract.name}}</td>
+                            <td > {{contract.signeddate ==
+                                    undefined ? "-" : contract.signeddate}}</td>
+                            <td > {{contract.billingdate ==
+                                    undefined ? "-" : contract.billingdate}}</td>
+                            <td > $ {{contract.mrc}}</td>
+                            <td > {{contract.term}}</td>
+                            <td > {{contract.supplier ==
+                                    undefined ? "-" : contract.supplier.name}}</td>
+                            
+                            <!-- <td><a  routerLink="/editContract/{{contract.id}}"  class="btn btn-primary" >Update</a></td> -->
+                        </tr>
+                        
+                    </tbody>
+    
+                </table>
+               
+                <div class="page">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
+                    </pagination-controls>
+                </div>
+            </div>
+            <h3 style="text-align:center;margin: 200px;" *ngIf="contractData.length == 0">
+                No Records
+            </h3>
+        </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
+        integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="js/popper.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+
+<router-outlet></router-outlet>

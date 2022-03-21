@@ -1,0 +1,594 @@
+<!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-circus">
+    <p style="font-size: 20px;color: white;"><i class="fas fa-spinner fa-pulse"
+            style="display: flex;justify-content: center;color: aqua;font-size: 60px;"></i><br />Loading....</p>
+</ngx-spinner> -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sidebar 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav class="sidebar" id="sidebar">
+            <div class="p-4 pt-5">
+
+                <ul class="list-unstyled components mb-5 " style="padding-top: 60px;">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Dashboard</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#"><b>Dashboard</b></a>
+                            </li>
+                            <li>
+                                <a href="#">Contract List</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Contract List</a>
+                    </li>
+
+                </ul>
+
+
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg_light_1"
+                style="margin-top: 40px; margin-bottom: -49px;">
+                <div class="container-fluid">
+
+                    <button (click)="f()" type="button" id="sidebarCollapse" class="btn btn-primary" style="margin-left: 30px;">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div style="padding-left: 15px;padding-top: 5px;">
+                        <h2 style="color: white;"><b><i>V&nbsp;I&nbsp;N&nbsp;C&nbsp;<i class="fa fa-cog" style="color: white;" aria-hidden="true"></i></i></b></h2>
+                        <!-- <img style="color: aliceblue;" width="200" height="60" src="https://images.squarespace-cdn.com/content/v1/5a6f9a73a803bb2b342aaf85/1520969818547-OHA9RGWBBRGIVF4XKVG9/VINCOLOGO_WHTonBLK.png" /> -->
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link navbar-brand text-light">Welcome : {{userName}} </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="btn nav-link btn-link text-light navbar-brand" (click)="Logout()">Logout</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-scale-multiple">
+                <p style="font-size: 20px;color: white;"><i class="fas fa-spinner fa-pulse"
+                        style="display: flex;justify-content: center;color: aqua;font-size: 60px;"></i><br />Loading....
+                </p>
+            </ngx-spinner> -->
+
+            <div style="padding: 5px; background-color: lightgray;">
+                <a routerLink="/contractList" class="btn btn-link"><i class="fa fa-long-arrow-left" style="font-size:36px;color: black;"></i></a>
+            </div>
+            <!-- form content -->
+            <div class="container-fluid">
+                <div style="margin:5px;">
+                    <h3>Stryker- Forescout Implementation</h3>
+                    <p>Contract</p>
+                </div>
+                <hr />
+                <form [formGroup]="contracts" (ngSubmit)="UpdateContract()">
+                    <div class="container-fluid" style="border: 1px solid black; padding: 30px; margin:4px;">
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Company :</div>
+                                    <div class="col-sm b-color">
+                                        <p>{{contracts.value.company.name}}</p>
+                                        <!-- <select formControlName="company" class="dropdown" class="form-control">
+                                            <option value="" selected>Select Company</option>
+                                            <option *ngFor="let company of companyDataName" [value]="company.id"
+                                                class="bold"><i class="fas fa-image"
+                                                    style="color: blue;font-size:120%;"></i>&nbsp;&nbsp;
+                                                {{company.name}}</option>
+                                        </select> -->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Name:</div>
+                                    <div class="col-sm">
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <p>{{contracts.value.name}}</p>
+                                                <!-- <input formControlName="name" id="name" class="form-control" type="text"
+                                                    placeholder="Name" /> -->
+                                                <div
+                                                    *ngIf="contracts.get('name')?.dirty || contracts.get('name')?.touched">
+                                                    <span class="text-danger" *ngIf="contracts.get('name')?.errors && 
+                                                    contracts.get('name')?.hasError('required')">
+                                                        Name is required</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Name:</div>
+                                    <div class="col-sm"><p>Stryker-AT&T</p></div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Owner:</div>
+                                    <div class="col-sm">
+                                        <span style="color: red;">*</span>&nbsp;&nbsp;
+                                        <i class="fas fa-user" style="color: blue;font-size:100%;"></i>&nbsp;&nbsp;
+                                        <b>Melissa Hughes</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Stage:</div>
+                                    <div class="col-sm">
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <p>{{contracts.value.stage}}</p>
+                                                <!-- <select formControlName="stage" class="dropdown" class="form-control">
+                                                    <option [value]=" " selected>Select stage</option>
+                                                    <option *ngFor="let stage of stageDataName" [value]="stage.id"
+                                                        class="bold">
+                                                        {{stage.name}}</option>
+                                                </select> -->
+                                                <div
+                                                    *ngIf="contracts.get('stage')?.dirty || contracts.get('stage')?.touched">
+                                                    <span class="text-danger" *ngIf="contracts.get('stage')?.errors && 
+                                            contracts.get('stage')?.hasError('required')">
+                                                        Stage is required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Term(Month):</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.term}}   </p>
+                                        <!-- <input class="form-control" type="number" formControlName="term"
+                                            placeholder="Term" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Install Date:</div>
+                                    <div class="col-sm">
+                                        <p *ngIf="contracts.value.installdate != undefined">{{contracts.value.installdate}}</p>
+                                        <!-- <input formControlName="installdate" name="installdate" placeholder="yyyy-MM-dd"
+                                            class="form-control" type="datetime-local" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Billing Date:</div>
+                                    <div class="col-sm">
+                                        <p *ngIf="contracts.value.billingdate != undefined">{{contracts.value.billingdate}}</p>
+                                        <!-- <input formControlName="billingdate" name="billingdate" placeholder="yyyy-MM-dd"
+                                            class="form-control" type="datetime-local" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Billing Contract:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.billingcontact.name}}</p>
+                                        <!-- <select formControlName="billingcontact" class="dropdown" class="form-control">
+                                            <option value="" selected>Select Billing Contract</option>
+                                            <option *ngFor="let contact of contactDataName" [value]="contact.id"
+                                                class="bold">
+                                                {{contact.fullname}}</option>
+                                        </select> -->
+                                        <!-- <input formControlName="BillingContract" name="BillingContract"  placeholder="Billing Contract"   class="form-control" type="text" required/> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">MRC:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.mrc}}</p>
+                                        <!-- <input class="form-control" type="number" formControlName="mrc"
+                                            placeholder="MRC" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Technical Contact:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.technicalcontact.name}}</p>
+                                        <!-- <select formControlName="technicalcontact" class="dropdown"
+                                            class="form-control">
+                                            <option value="" selected>Select Technical Contract</option>
+                                            <option *ngFor="let contact of contactDataName" [value]="contact.id"
+                                                class="bold">
+                                                {{contact.fullname}}</option>
+                                        </select> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Supplier:</div>
+                                    <div class="col-sm b-color">
+                                        <p>{{contracts.value.supplier.name}}</p>
+                                        <!-- <select formControlName="supplier" class="dropdown" class="form-control">
+                                            <option value="" selected>Select Company</option>
+                                            <option *ngFor="let comapany of companyDataName" [value]="comapany.id"
+                                                class="bold"><i class="fas fa-image"
+                                                    style="color: blue;font-size:120%;"></i>&nbsp;&nbsp;
+                                                {{comapany.name}}</option>
+                                        </select> -->
+                                        <!-- <i class="fas fa-image" style="color: blue;font-size:120%;"></i>&nbsp;&nbsp;
+                                        <b>AT&T</b> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Supplier contact:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.suppliercontact.name}}</p>
+                                        <!-- <select formControlName="suppliercontact" class="dropdown" class="form-control">
+                                            <option value="" selected>Select Supplier Contract</option>
+                                            <option *ngFor="let contact of contactDataName" [value]="contact.id"
+                                                class="bold">
+                                                {{contact.fullname}}</option>
+                                        </select> -->
+                                        <!-- <input formControlName="SupplierContact" name="SupplierContact"  placeholder="Supplier contact"   class="form-control" type="number" required/> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Supplier Contract #:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.suppliercontract}}</p>
+                                        <!-- <input class="form-control" type="text" formControlName="suppliercontract"
+                                            placeholder="Supplier Contract" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Renewal date:</div>
+                                    <div class="col-sm b-color">
+                                        <p *ngIf="contracts.value.renewaldate  != undefined">{{contracts.value.renewaldate}}</p>
+                                        <!-- <input formControlName="renewaldate" name="renewaldate"
+                                            placeholder="Renewal Date" class="form-control" type="datetime-local"
+                                            required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Auto-Renewal:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.autorenewal}}</p>
+                                        <!-- <input formControlName="autorenewal" name="autorenewal" type="checkbox"
+                                            class="check" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">NRC:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.nrc}}</p>
+                                        <!-- <input formControlName="nrc" name="nrc" placeholder="NRC" class="form-control"
+                                            type="number" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Managed Contract:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.managedcontract}}</p>
+                                        <!-- <input formControlName="managedcontract" name="managedcontract"
+                                            placeholder="Managed Contract" class="check" type="checkbox" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Decision Maker:</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.decisionmakercontract}}</p>
+                                        <!-- <input formControlName="decisionmakercontract" name="decisionmakercontract"
+                                            placeholder="Decision Maker" class="form-control" type="text" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6"># Of Decision Days:</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.decisiondays}}</p>
+                                        <!-- <input formControlName="decisiondays" name="decisiondays"
+                                            placeholder="Decision Days" type="number" class="form-control" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Industry:</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.industry}}</p>
+                                        <!-- <input formControlName="industry" name="industry" placeholder="Industry"
+                                            type="text" class="form-control" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Strategy for Contact:</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.strategyforcontract}}</p>
+                                        <!-- <input formControlName="strategyforcontract" name="strategyforcontract"
+                                            placeholder="Strategy for Contact" type="text" class="form-control" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Tech Type:</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.techtype.name}}</p>
+                                        <!-- <select formControlName="techtype" class="dropdown" class="form-control">
+                                            <option value="" selected>Select Tech Type</option>
+                                            <option *ngFor="let type of opportunityDataName" class="bold"
+                                                [value]="type.id">{{type.name}}
+                                            </option>
+                                        </select> -->
+                                        <!-- <input formControlName="TechType" name="TechType"  placeholder="Tech Type"   class="form-control" type="text" required/> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Location:</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.location}}</p>
+                                        <!-- <input formControlName="location" name="location" placeholder="Location"
+                                            class="form-control" type="text" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">PO Required?</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.porequired}}</p>
+                                        <!-- <input formControlName="porequired" name="porequired" type="checkbox"
+                                            class="check" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">PO# :</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.po}}</p>
+                                        <!-- <input formControlName="po" name="po" placeholder="PO" class="form-control"
+                                            type="text" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Yearly Spend:</div>
+                                    <div class="col-sm ">
+                                        <p>{{contracts.value.yearlyspend}}</p>
+                                        <!-- <input formControlName="yearlyspend" name="yearlyspend"
+                                            placeholder="Yearly Spend" class="form-control" type="number" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">MSA:</div>
+                                    <div class="col-sm">
+                                        <p>{{contracts.value.msa}}</p>
+                                        <!-- <input formControlName="msa" name="msa" type="checkbox" class="check" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">MSA Notice Dates:</div>
+                                    <div class="col-sm">
+                                        <p *ngIf="contracts.value.msanoticedates != undefined">{{contracts.value.msanoticedates}}</p>
+                                        <!-- <input formControlName="msanoticedates" name="msanoticedates"
+                                            placeholder="yyyy-MM-dd" class="form-control" type="datetime-local"
+                                            required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Signed dates:</div>
+                                    <div class="col-sm ">
+                                        <p *ngIf="contracts.value.signeddate != undefined">{{contracts.value.signeddate}}</p>
+                                        <!-- <input formControlName="signeddate" name="signeddate" placeholder="yyyy-MM-dd"
+                                            class="form-control" type="datetime-local" required /> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">1<sup>st</sup>&nbsp; Renewal Notification Date:</div>
+                                    <div class="col-sm-9">
+                                        <p *ngIf="contracts.value.firstrenewalnotificationdate != undefined">{{contracts.value.firstrenewalnotificationdate}}</p>
+                                        <!-- <input formControlName="firstrenewalnotificationdate"
+                                            name="strenewalnotificationdate" placeholder="yyyy-MM-dd"
+                                            class="form-control" type="datetime-local" required /> -->
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>{{contracts.value.firstrenewalnotificationdatesent}}</p>
+                                        <!-- <input formControlName="firstrenewalnotificationdatesent"
+                                            name="strenewalnotificationdatesent" type="checkbox" class="check" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">2<sup>nd</sup>&nbsp; Renewal Notification Date:</div>
+                                    <div class="col-sm-9">
+                                        <p *ngIf="contracts.value.secondrenewalnotificationdate != undefined">{{contracts.value.secondrenewalnotificationdate}}</p>
+                                        <!-- <input formControlName="secondrenewalnotificationdate"
+                                            name="ndrenewalnotificationdate" placeholder="yyyy-MM-dd"
+                                            class="form-control" type="datetime-local" required /> -->
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p >{{contracts.value.secondrenewalnotificationdatesent}}</p>
+                                        <!-- <input formControlName="secondrenewalnotificationdatesent"
+                                            name="ndrenewalnotificationdatesent" type="checkbox" class="check" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">3<sup>rd</sup>&nbsp;Renewal Notification Date:</div>
+                                    <div class="col-sm">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <p *ngIf="contracts.value.thirdrenewalnotificationdate != undefined">{{contracts.value.thirdrenewalnotificationdate}}</p>
+                                                <!-- <input formControlName="thirdrenewalnotificationdate"
+                                                    name="rdrenewalnotificationdate" placeholder="yyyy-MM-dd"
+                                                    class="form-control" type="datetime-local" required /> -->
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <p>{{contracts.value.thirdrenewalnotificationdatesent}}</p>
+                                                <!-- <input formControlName="thirdrenewalnotificationdatesent"
+                                                    name="rdrenewalnotificationdatesent" type="checkbox"
+                                                    class="check" /> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><hr/>
+                        <div class="row rm">
+                            <div class="col-sm">
+                                <div class="row">
+                                    <div class="col-sm-6">Final Decision Date:</div>
+                                    <div class="col-sm">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <p *ngIf="contracts.value.finaldecisiondate != undefined">{{contracts.value.finaldecisiondate}}</p>
+                                                <!-- <input formControlName="finaldecisiondate" name="finaldecisiondate"
+                                                    placeholder="yyyy-MM-dd" class="form-control" type="datetime-local"
+                                                    required /> -->
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <p>{{contracts.value.finaldecisiondatesent}}</p>
+                                                <!-- <input formControlName="finaldecisiondatesent"
+                                                    name="finaldecisiondatesent" type="checkbox" class="check" /> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm">
+                                <div class="row">
+                                    <div style="display:flex;justify-content:flex-end">
+                                        <button class="btn btn-primary" [disabled]="contracts.get('name')?.invalid && contracts.get('stage')?.invalid && contracts.get('stage')?.errors && 
+                                        contracts.get('stage')?.hasError('required') && contracts.get('name')?.hasError('required')"
+                                            type="submit">Update</button>
+                                        <a style="margin-left: 10px;" routerLink="/contractList" class="btn btn-danger">Back</a>
+                                    </div>
+                                </div>
+                            </div> -->
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
+        integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="js/popper.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="src/main.js"></script>
+</body>
+
+</html>
+
+
+
+<router-outlet></router-outlet>
