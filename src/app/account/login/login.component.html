@@ -3,16 +3,20 @@
   
   <div class="container-fluid ps-md-0">
     <div class="row g-0">
-      <div class="bg-image d-none d-md-flex col-md-0 col-lg-8 "></div>
+      <div class="bg-image d-none d-md-flex col-md-0 col-lg-8 ">
+        <!-- <img src="../../assets/images/vincoLogin.jpg"> -->
+      </div>
       <div class="col-md-12 col-lg-4">
         <div class="login d-flex align-items-center py-5">
           <div class="container">
             <div class="row">
               <div class="col-md-10 col-lg-10 mx-auto">
-          
-          <div class="text-center mb-5" ><img src="https://vinco.io/wp-content/uploads/2021/02/Vinco-Logo-gradiant-1024x294.png" class="w-50"></div>
-          
-                <h3 class="login-heading mb-4">Login</h3>
+
+                <div class="text-center mb-5" >
+                  <img src="https://vinco.io/wp-content/uploads/2021/02/Vinco-Logo-gradiant-1024x294.png" class="w-50"></div>
+        
+                <h3 class="login-heading mb-4">Login</h3><br/>
+                <h3 *ngIf="loginmsg != null" class="text-danger">{{loginmsg}}</h3>
   
                 <!-- Sign In Form -->
                 <form #userForm="ngForm">

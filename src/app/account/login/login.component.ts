@@ -10,14 +10,16 @@ import { Login } from '../../Models/models';
 })
 export class LoginComponent implements OnInit {
 
-  public loginmsg:any="";
+  public loginmsg:any=null;
   loginModel = new Login("","","","");
 
   constructor(private router : Router,private _service:AccountService) { }
 
   submitLogin(){
     ////
-   this.loginmsg = this._service.postLogin(this.loginModel).subscribe((res : any) => {
+    //
+   this._service.postLogin(this.loginModel).subscribe((res : any) => {
+     //
      //
       //console.log(res.loginmsg);"3a541f80-a10c-ec11-b6e5-000d3a8fbb18"
 
@@ -32,16 +34,18 @@ export class LoginComponent implements OnInit {
           this.loginmsg="Login Successfully";
     }
 
-else if(res.message == "Invalid username or password"){
+else if(res.status != 200){
   ////////
   this.loginmsg="Invalid Login Attempt";
 }
-else if(res.message == "'password' must not be empty."){
+else if(res.status == 200){
   ////////
   this.loginmsg="password' must not be empty";
 }
      
     })
+        
+    
   }
 
 

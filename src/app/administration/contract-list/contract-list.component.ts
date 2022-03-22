@@ -5,6 +5,7 @@ import { AccountService } from 'src/app/Services/account.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AuthorisedSideNavService } from '../layout/authorised/services/authorised-side-nav.service';
 declare var test: any;
+// declare var activeClass: any;
 
 @Component({
   selector: 'app-contract-list',
@@ -12,11 +13,29 @@ declare var test: any;
   styleUrls: ['./contract-list.component.css']
 })
 export class ContractListComponent implements OnInit {
+  toggle = true;
+  dash = "Dashboard";
 
+  enableDisableRule() {
+    this.toggle = !this.toggle;
+    this.dash = this.toggle ? "Dashboard" : "Dashboard";
+  }
   f(){
     new test();
   }
-  
+  // active(){
+  //   //
+  //   new activeClass();
+  // }
+  // active(){
+  //   //
+  //   new activeClass();
+  // }
+  public activeProjectIndex!: number;
+
+public activeProject(index: number): void {
+  this.activeProjectIndex = index;
+}
   public contractData: any = [];
   public latest_date: any = [];
   public company: any = [];
@@ -35,7 +54,11 @@ export class ContractListComponent implements OnInit {
   pageSize = 10;
   pageSizes = [10, 20, 30];
 
-  constructor(public sideNavService: AuthorisedSideNavService,private spinnerService: NgxSpinnerService,private _serviceUser: AccountService,private router:Router, private datepipe: DatePipe) { }
+  constructor(public sideNavService: AuthorisedSideNavService,
+              private spinnerService: NgxSpinnerService,
+              private _serviceUser: AccountService,
+              private router:Router, 
+              private datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.userName = window.localStorage.getItem("userName");

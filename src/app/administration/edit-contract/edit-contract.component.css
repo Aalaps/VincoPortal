@@ -1,37 +1,56 @@
-.b-color{
-  color:blue
-}
-
-.bold{
-  font-weight: bolder;
-}
-.check{
-  height: 20px;
-  width: 20px;
-}
-
-p{
-  color: blue;
-  font-size: 16px;
-  font-weight: bolder;
-
-}
-
 .cen{
   display: flex;
   justify-content: center;
 }
 .page{
-  display: flex;
-  justify-content: flex-end;
+  /* display: flex;
+  justify-content: flex-end; */
+  /* position: absolute; */
+  top: 85%;
+  right: 30%;
 }
+
 .ui{
   background-color: lightgray;
 }
-.rm{
-  margin-bottom: 20px;
+
+.b-color{
+color:blue
 }
 
+.bold{
+font-weight: bolder;
+}
+.check{
+height: 20px;
+width: 20px;
+}
+
+.rm{
+margin-bottom: 20px;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+width: 100%;
+}
+
+th, td {
+text-align: left;
+padding: 8px;
+}
+p{
+  color: blue;
+  font-size: 20px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+
+ul.components li.active >a { color: lightseagreen; }
+
+ul.components li.active2 >a { color: lightseagreen; }
 /*!
 * Bootstrap v4.3.1 (https://getbootstrap.com/)
 * Copyright 2011-2019 The Bootstrap Authors
@@ -3753,7 +3772,8 @@ input[type="button"].btn-block {
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .nav-link.active {
-  color: #fff; }
+  color: #fff; 
+}
 
 .navbar-light .navbar-toggler {
   color: rgba(0, 0, 0, 0.5);
@@ -8254,8 +8274,8 @@ h1, h2, h3, h4, h5,
   width: 100%; }
 
 #sidebar {
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 200px;
+  max-width: 200px;
   background: #1d1919;
   color: #4a4fff;
   -webkit-transition: all 0.3s;
@@ -8288,6 +8308,7 @@ h1, h2, h3, h4, h5,
     #sidebar ul li.active > a {
       background: transparent;
       color: lightseagreen; }
+   
   @media (max-width: 991.98px) {
     #sidebar {
       margin-left: -300px; }

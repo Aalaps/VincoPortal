@@ -24,6 +24,7 @@ import { AuthorisedTopNavComponent } from './layout/authorised/authorised-top-na
 import { AuthorisedSideNavTogglerComponent } from './layout/authorised/authorised-side-nav-toggler/authorised-side-nav-toggler.component';
 import { AuthorisedSideNavComponent } from './layout/authorised/authorised-side-nav/authorised-side-nav.component';
 import { AuthorisedPageContentComponent } from './layout/authorised/authorised-page-content/authorised-page-content.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AuthorisedPageContentComponent } from './layout/authorised/authorised-p
     AuthorisedSideNavTogglerComponent,
     AuthorisedSideNavComponent,
     AuthorisedPageContentComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
