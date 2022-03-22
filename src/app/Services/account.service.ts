@@ -8,7 +8,7 @@ import {  ContractData, Login } from '../Models/models';
 export class AccountService {
 
 constructor(private http : HttpClient) { }
-private _baseURL :string="http://vincodev.azurewebsites.net/api/";
+private _baseURL :string="https://vincodev.azurewebsites.net/api/";
 private _login :string="auth/login";
 private _opportunity :string="opportunity";
 private _contact :string="contact";
