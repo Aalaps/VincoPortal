@@ -1,0 +1,11 @@
+.b-color{
+    color:blue
+}
+
+.bold{
+    font-weight: bolder;
+}
+.check{
+    height: 20px;
+    width: 20px;
+}
