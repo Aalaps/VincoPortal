@@ -12,10 +12,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg_light_1" style="margin-top: 40px; margin-bottom: -49px;">
+    <nav class="navbar navbar-expand-sm  navbar-light bg_light_1" >
         <div class="container-fluid">
-            <div class="p-4 pt-2">
-                <img style="color: aliceblue;margin-top: 2px;padding-left: 20px;" width="200" height="50" src="../../assets/images/vinco_logo_white.png" />
+            <div>
+                <img alt="Vinco Logo" width="100px" style="float: left;" src="../../assets/images/vinco_logo_white.png" />
             </div>
             <!-- <button (click)="f()" type="button" id="sidebarCollapse" class="btn btn-primary"  style="margin-left: 30px;">
                 <i class="fa fa-bars"></i>
@@ -31,16 +31,22 @@
                <h1 style="color: white;"><b><i>V&nbsp;I&nbsp;N&nbsp;C&nbsp;<i class="fa fa-cog" style="color: white;" aria-hidden="true"></i></i></b></h2> 
                 <img style="color: aliceblue;" width="200" height="60" src="../../assets/images/vinco_logo_white.png" />
             </div> -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto" style="padding-right: 100px;">
-                    <li class="nav-item active">
-                        <a class="btn btn-link nav-link navbar-brand text-light">Welcome : {{userName}} </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn nav-link btn-link text-light navbar-brand" (click)="Logout()" style="margin-right: 100px;">Logout</a>
-                    </li>
-                  
-                </ul>
+            <div  id="navbarSupportedContent">
+                <div style="
+                display: flex;
+                justify-items: flex-end;
+            ">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item active">
+                            <a class="btn btn-link nav-link navbar-brand text-light">Welcome : {{userName}} </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="btn nav-link btn-link text-light navbar-brand" (click)="Logout()" >Logout</a>
+                        </li>
+                      
+                    </ul>
+                </div>
+                
               </div>
             <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding: 10px;">
                 <ul class="nav navbar-nav ml-auto">
@@ -59,7 +65,7 @@
         <nav class="sidebar" id="sidebar">
             <div >
                
-                <div class="p-4 pt-2">
+                <div class="p-4 pt-5">
                     <ul class="list-unstyled components mb-5 ">
                         <li  (click)="f()">
                          <a routerLink="/dashboard"
@@ -130,10 +136,30 @@
             
                         </table>
                      </div>
-                <div style="display: flex;justify-content:flex-end;">
-                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
-                    </pagination-controls>
-                </div>
+                     <div class="row mt-3" style="display: flex;">
+                        <!-- <div class="col-sm-9" style="display: flex;justify-content: flex-start;">
+                               <h5>
+                                showing Items : &nbsp;&nbsp;
+                                    <span *ngIf="contractData.length > pageSizes[0]">
+                                        <select (change)="handlePageSizeChange($event)">
+                                            <option *ngFor="let size of pageSizes" [ngValue]="size">
+                                              {{ size }}
+                                            </option>
+                                          </select> &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
+                                        </span>
+                                    <span *ngIf="pageSizes[0] > contractData.length">
+                                        {{contractData.length}} &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
+                                    </span>
+                                
+
+                               </h5>
+                        </div> -->
+                        <div class="col-sm" style="display: flex;justify-content:flex-end;">
+                           <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
+                           </pagination-controls>
+                        </div>
+                     </div>
+                     
             </div>
             <h3 style="text-align:center;margin: 200px;" *ngIf="contractData.length == 0">
                 No Records

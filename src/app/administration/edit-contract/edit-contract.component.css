@@ -40,13 +40,12 @@ th, td {
 text-align: left;
 padding: 8px;
 }
-p{
-  color: blue;
-  font-size: 20px;
-}
 
 tr:nth-child(even){background-color: #f2f2f2}
-
+p{
+  color: #17a2b8;
+  font-size: 18px;
+}
 
 ul.components li.active >a { color: lightseagreen; }
 
@@ -3510,7 +3509,7 @@ input[type="button"].btn-block {
   display: inline-block;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap; }
@@ -8243,17 +8242,17 @@ h1, h2, h3, h4, h5,
   background-position: center center; }
 
 .navbar {
-  padding: 15px 10px;
+  padding: 6px 10px !important;
     background: #fff;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 0px !important;
     -webkit-box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);
     box-shadow: 1px 1px 3px rgb(0 0 0 / 10%);
-    top: -49px;
+    top: 0px !important;
     position: relative;
-    width: 106.3%;
-    left: -48px;
+    width: 100% !important;
+    /* left: -48px; */
 }
 
 .bg_light_1 {background: #1d1919 !important; }
@@ -8274,10 +8273,10 @@ h1, h2, h3, h4, h5,
   width: 100%; }
 
 #sidebar {
-  min-width: 200px;
-  max-width: 200px;
-  background: #1d1919;
-  color: #4a4fff;
+  min-width: 165px;
+  max-width: 165px;
+  background: #8786863b;
+  color: black;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s; }
@@ -8301,13 +8300,13 @@ h1, h2, h3, h4, h5,
     #sidebar ul li a {
       padding: 10px 0;
       display: block;
-      color: rgba(255, 255, 255, 0.8);
+      color: black;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       #sidebar ul li a:hover {
-        color:  lightseagreen;  }
+        color:  #1c96ed;  }
     #sidebar ul li.active > a {
       background: transparent;
-      color: lightseagreen; }
+      color: #1c96ed; }
    
   @media (max-width: 991.98px) {
     #sidebar {
@@ -8389,7 +8388,7 @@ a[data-toggle="collapse"] {
   padding: 0.75rem 1rem;
 }
 .hov{
-    color: skyblue;
+    color: black;
 }
 .hov:hover{
     background-color: lightgray;

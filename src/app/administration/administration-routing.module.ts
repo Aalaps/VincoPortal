@@ -12,6 +12,7 @@ import { ContactComponent } from './contact/contact.component';
 import { CompanyComponent } from './company/company.component';
 import { EditContractComponent } from './edit-contract/edit-contract.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ModalComponent } from './model/model.component';
 // import { AuthGuardService as AuthGuard } from '../Infrastructure/auth-guard.service';
 
 const routes: Routes = [{ path: '', component: AdministrationComponent,children :[
@@ -22,6 +23,7 @@ const routes: Routes = [{ path: '', component: AdministrationComponent,children 
   {path: 'company' , component: CompanyComponent,canActivate: [AuthenticateGuard] },
   {path: 'editContract/:id' , component: EditContractComponent,canActivate: [AuthenticateGuard] },
   {path: 'dashboard' , component: DashboardComponent,canActivate: [AuthenticateGuard] },
+  {path: 'model' , component: ModalComponent,canActivate: [AuthenticateGuard] },
   {path: 'AccessDeniedPage' , component: AccessDeniedComponent }
 ] }];
 

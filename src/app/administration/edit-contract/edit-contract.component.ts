@@ -60,6 +60,7 @@ formInit():void{
     supplier:[""],
     suppliercontract:[""],
     location:[""],
+    signatureprocess:[""],
     renewaldate:[Date],
     nrc:[""],
     mrc:[""],

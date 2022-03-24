@@ -25,6 +25,8 @@ import { AuthorisedSideNavTogglerComponent } from './layout/authorised/authorise
 import { AuthorisedSideNavComponent } from './layout/authorised/authorised-side-nav/authorised-side-nav.component';
 import { AuthorisedPageContentComponent } from './layout/authorised/authorised-page-content/authorised-page-content.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ModelService } from './model/model.service';
+import { ModalComponent } from './model/model.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AuthorisedSideNavComponent,
     AuthorisedPageContentComponent,
     DashboardComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +57,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     provide: HTTP_INTERCEPTORS,
     useClass: AppInterceptor,
     multi: true
-  }, AuthenticateGuard]
+  }, AuthenticateGuard,ModelService]
 })
 
 

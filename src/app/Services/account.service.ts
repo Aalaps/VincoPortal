@@ -18,6 +18,7 @@ private _getContractList :string="contractsbyuserid";
 private _ownerId :string="systemuser";
 private _contractListById :string="contract";
 private _updateContract :string="contract";
+private modals: any[] = [];
 
 // private _administrationUrl :string="http://localhost:51234/api/Administration";
 private _contractURL :string="https://622af7c514ccb950d22a906f.mockapi.io/api/contracts";
@@ -65,6 +66,7 @@ roleManagers:any;
 "company":data.company,
 "decisionmakercontract":data.decisionmakercontract,
 "decisionprocess":data.decisionprocess,
+"signatureprocess":data.signatureprocess,
 "installdate":data.installdate,
 "location":data.location,
 "managedcontract":data.managedcontract,
@@ -77,7 +79,6 @@ roleManagers:any;
 "po":data.po,
 "porequired":data.porequired,
 "renewaldate":data.renewaldate,
-"signatureprocess":data.signatureprocess,
 "signeddate":data.signeddate,
 "stage":data.stage,
 "supplier":data.supplier,
@@ -159,6 +160,12 @@ roleManagers:any;
   }
     return this.http.post(this._baseURL + this._updateContract , _data);
   } 
+
+  open(id: string) {
+    // open modal specified by id
+    const modal = this.modals.find(x => x.id === id);
+    modal.open();
+}
 
 }
 

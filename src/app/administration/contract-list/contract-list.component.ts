@@ -23,14 +23,7 @@ export class ContractListComponent implements OnInit {
   f(){
     new test();
   }
-  // active(){
-  //   //
-  //   new activeClass();
-  // }
-  // active(){
-  //   //
-  //   new activeClass();
-  // }
+ 
   public activeProjectIndex!: number;
 
 public activeProject(index: number): void {
@@ -51,8 +44,8 @@ public activeProject(index: number): void {
   currentIndex = -1;
   title = '';
   count = 0;
-  pageSize = 10;
-  pageSizes = [10, 20, 30];
+  pageSize = 15;
+  pageSizes = [15, 30, 45];
 
   constructor(public sideNavService: AuthorisedSideNavService,
               private spinnerService: NgxSpinnerService,

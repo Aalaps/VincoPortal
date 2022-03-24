@@ -15,6 +15,7 @@ import { AccountService } from './Services/account.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AuthenticateGuard } from './authenticate.guard';
+import { ModelService } from './administration/model/model.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AuthenticateGuard } from './authenticate.guard';
     BrowserAnimationsModule,
     NgxSpinnerModule
   ],
-  providers: [DatePipe,AuthenticateGuard,AccountService],
+  providers: [DatePipe,AuthenticateGuard,AccountService,ModelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
