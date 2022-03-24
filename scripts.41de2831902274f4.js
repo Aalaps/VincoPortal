@@ -1,0 +1,1 @@
+function test(){"use strict";$(".js-fullheight").css("height",$(window).height()),$(window).on(function(){$(".js-fullheight").css("height",$(window).height())}),$("#sidebar").toggleClass("active")}jQuery;
