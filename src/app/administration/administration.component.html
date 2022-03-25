@@ -60,7 +60,8 @@
                
                 <div class="p-4 pt-5">
                     <ul class="list-unstyled components mb-5 ">
-                        <li  (click)="f()">
+                        <li 
+                        (click)="f($event)" class="dash">
                          <a routerLink="/dashboard"
                             routerListActive="active">Dashboard</a>
                         </li>
@@ -77,7 +78,7 @@
     
                             </ul>
                         </li> -->
-                        <li (click)="f()" class="active"> 
+                        <li (click)="f($event)" class="active contract"> 
                          <a routerLink="/contractList" 
                             routerListActive="active">Contract List</a>
                         </li>

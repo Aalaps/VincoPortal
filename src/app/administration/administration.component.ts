@@ -11,8 +11,8 @@ declare var test: any;
 
 
 export class AdministrationComponent implements OnInit {
-  f(){
-    new test();
+  f(event:any){
+    new test(event);
   }
   items: any;
   public pendingCount:any;
