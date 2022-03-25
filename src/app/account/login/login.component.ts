@@ -20,18 +20,9 @@ export class LoginComponent implements OnInit {
 
   submitLogin(){
     this.spinnerService.show();
-    ////
-    //
    this._service.postLogin(this.loginModel).subscribe((res : any) => {
-     //
-     //
-      //console.log(res.loginmsg);"3a541f80-a10c-ec11-b6e5-000d3a8fbb18"
 
    if(res.data.contact_id != null){
-     ////
-  //    setTimeout(() => {
-  //     this.spinnerService.hide();
-  //  }, 500);
     window.localStorage.setItem("contact_id",res.data.contact_id );
     window.localStorage.setItem("jwtToken", res.data.token);
     window.localStorage.setItem("userName", res.data.firstname);
@@ -42,11 +33,9 @@ export class LoginComponent implements OnInit {
     }
 
 else if(res.status != 200){
-  ////////
   this.loginmsg="Invalid Login Attempt";
 }
 else if(res.status == 200){
-  ////////
   this.loginmsg="password' must not be empty";
 }
      

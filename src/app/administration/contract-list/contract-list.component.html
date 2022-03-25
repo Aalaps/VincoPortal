@@ -1,185 +1,70 @@
-<!doctype html>
-<html lang="en">
+<div class="container-fluid mt-2"  *ngIf="contractData.length != 0">
+    <div class="table-responsive">
+            <table class="table">
+                <thead  style="background: rgb(204, 204, 204); border-bottom:3px solid #000;">
+                    <tr  >
+                        <th>Name</th>
+                        <th>Signed Dates</th>
+                        <th>Billing Date</th>
+                        <th>MRC</th>
+                        <th>Term(Months)</th>
+                        <th>Supplier</th>
+                        <th>Company</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contract of contractData  | paginate : {
+                            itemsPerPage: pageSize,
+                            currentPage: page,
+                            totalItems: count
+                        };let i=index;" class="text-center hov" (click)="goToUpdatePage(contract.id)">
+                        <td > {{contract.name}}</td>
+                        <td > {{contract.signeddate ==
+                                undefined ? "-" : contract.signeddate}}</td>
+                        <td > {{contract.billingdate ==
+                                undefined ? "-" : contract.billingdate}}</td>
+                        <td > $ {{contract.mrc}}</td>
+                        <td > {{contract.term}}</td>
+                        <td > {{contract.supplier ==
+                                undefined ? "-" : contract.supplier.name}}</td>
+                        <td > {{contract.company ==
+                                undefined ? "-" : contract.company.name}}</td>
+                        
+                        <!-- <td><a  routerLink="/editContract/{{contract.id}}"  class="btn btn-primary" >Update</a></td> -->
+                    </tr>
+                    
+                </tbody>
 
-<head>
-    <title>Sidebar 01</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            </table>
+         </div>
+         <div class="row mt-3" style="display: flex;">
+            <!-- <div class="col-sm-9" style="display: flex;justify-content: flex-start;">
+                   <h5>
+                    showing Items : &nbsp;&nbsp;
+                        <span *ngIf="contractData.length > pageSizes[0]">
+                            <select (change)="handlePageSizeChange($event)">
+                                <option *ngFor="let size of pageSizes" [ngValue]="size">
+                                  {{ size }}
+                                </option>
+                              </select> &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
+                            </span>
+                        <span *ngIf="pageSizes[0] > contractData.length">
+                            {{contractData.length}} &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
+                        </span>
+                    
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-sm  navbar-light bg_light_1" >
-        <div class="container-fluid">
-            <div>
-                <img alt="Vinco Logo" width="100px" style="float: left;" src="../../assets/images/vinco_logo_white.png" />
-            </div>
-            <!-- <button (click)="f()" type="button" id="sidebarCollapse" class="btn btn-primary"  style="margin-left: 30px;">
-                <i class="fa fa-bars"></i>
-                <span class="sr-only">Toggle Menu</span>
-            </button>
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button> -->
-
-            <!-- <div  style="padding-left: 1px;padding-top: 5px;">
-               <h1 style="color: white;"><b><i>V&nbsp;I&nbsp;N&nbsp;C&nbsp;<i class="fa fa-cog" style="color: white;" aria-hidden="true"></i></i></b></h2> 
-                <img style="color: aliceblue;" width="200" height="60" src="../../assets/images/vinco_logo_white.png" />
+                   </h5>
             </div> -->
-            <div  id="navbarSupportedContent">
-                <div style="
-                display: flex;
-                justify-items: flex-end;
-            ">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item active">
-                            <a class="btn btn-link nav-link navbar-brand text-light">Welcome : {{userName}} </a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="btn nav-link btn-link text-light navbar-brand" (click)="Logout()" >Logout</a>
-                        </li>
-                      
-                    </ul>
-                </div>
-                
-              </div>
-            <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding: 10px;">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="btn btn-link nav-link navbar-brand text-light">Welcome : {{userName}} </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="btn nav-link btn-link text-light navbar-brand" (click)="Logout()">Logout</a>
-                    </li>
-
-                </ul>
-            </div> -->
-        </div>
-    </nav>
-    <div class="wrapper d-flex align-items-stretch">
-        <nav class="sidebar" id="sidebar">
-            <div >
-               
-                <div class="p-4 pt-5">
-                    <ul class="list-unstyled components mb-5 ">
-                        <li  (click)="f()">
-                         <a routerLink="/dashboard"
-                            routerListActive="active">Dashboard</a>
-                        </li>
-                        <!-- <li class="active">
-                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-                                class="dropdown-toggle">Dashboard</a>
-                            <ul class="collapse list-unstyled" id="homeSubmenu">
-                                <li>
-                                    <a href="#"><b>Dashboard</b></a>
-                                </li>
-                                <li>
-                                    <a href="#">Contract List</a>
-                                </li>
-    
-                            </ul>
-                        </li> -->
-                        <li (click)="f()" class="active"> 
-                         <a routerLink="/contractList" 
-                            routerListActive="active">Contract List</a>
-                        </li>
-    
-                    </ul>
-                </div>
+            <div class="col-sm" style="display: flex;justify-content:flex-end;">
+               <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
+               </pagination-controls>
             </div>
-        </nav>
-
-        <!-- Page Content  -->
-        <div id="content" class="">
-
-           
-            
-            <div class="container-fluid mt-2"  *ngIf="contractData.length != 0">
-                <div class="table-responsive">
-                        <table class="table">
-                            <thead  style="background: rgb(204, 204, 204); border-bottom:3px solid #000;">
-                                <tr  >
-                                    <th>Name</th>
-                                    <th>Signed Dates</th>
-                                    <th>Billing Date</th>
-                                    <th>MRC</th>
-                                    <th>Term(Months)</th>
-                                    <th>Supplier</th>
-                                    <!-- <th>Company</th> -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let contract of contractData  | paginate : {
-                                        itemsPerPage: pageSize,
-                                        currentPage: page,
-                                        totalItems: count
-                                    };let i=index;" class="text-center hov" (click)="goToUpdatePage(contract.id)">
-                                    <td > {{contract.name}}</td>
-                                    <td > {{contract.signeddate ==
-                                            undefined ? "-" : contract.signeddate}}</td>
-                                    <td > {{contract.billingdate ==
-                                            undefined ? "-" : contract.billingdate}}</td>
-                                    <td > $ {{contract.mrc}}</td>
-                                    <td > {{contract.term}}</td>
-                                    <td > {{contract.supplier ==
-                                            undefined ? "-" : contract.supplier.name}}</td>
-                                    
-                                    <!-- <td><a  routerLink="/editContract/{{contract.id}}"  class="btn btn-primary" >Update</a></td> -->
-                                </tr>
-                                
-                            </tbody>
-            
-                        </table>
-                     </div>
-                     <div class="row mt-3" style="display: flex;">
-                        <!-- <div class="col-sm-9" style="display: flex;justify-content: flex-start;">
-                               <h5>
-                                showing Items : &nbsp;&nbsp;
-                                    <span *ngIf="contractData.length > pageSizes[0]">
-                                        <select (change)="handlePageSizeChange($event)">
-                                            <option *ngFor="let size of pageSizes" [ngValue]="size">
-                                              {{ size }}
-                                            </option>
-                                          </select> &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
-                                        </span>
-                                    <span *ngIf="pageSizes[0] > contractData.length">
-                                        {{contractData.length}} &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
-                                    </span>
-                                
-
-                               </h5>
-                        </div> -->
-                        <div class="col-sm" style="display: flex;justify-content:flex-end;">
-                           <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
-                           </pagination-controls>
-                        </div>
-                     </div>
-                     
-            </div>
-            <h3 style="text-align:center;margin: 200px;" *ngIf="contractData.length == 0">
-                No Records
-            </h3>
-        </div>
-
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- <script src="js/jquery.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"
-        integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="js/popper.js"></script> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
-    <script src="js/main.js"></script>
-</body>
-
-</html>
+         </div>
+         
+</div>
+<h3 style="text-align:center;margin: 200px;" *ngIf="contractData.length == 0">
+    No Records
+</h3>
 
 <router-outlet></router-outlet>
 
