@@ -8310,7 +8310,7 @@ h1, h2, h3, h4, h5,
   -o-transition: all 0.3s;
   transition: all 0.3s; }
   #sidebar.active {
-    margin-left: -300px; }
+    margin-left: 0px !important; }
   #sidebar .logo {
     display: block;
     width: 120px;
