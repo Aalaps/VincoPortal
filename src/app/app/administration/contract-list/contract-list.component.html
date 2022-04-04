@@ -1,0 +1,71 @@
+<div class="container-fluid mt-2"  *ngIf="contractData.length != 0">
+    <div class="table-responsive">
+            <table class="table">
+                <thead  style="background: rgb(204, 204, 204); border-bottom:3px solid #000;">
+                    <tr  >
+                        <th>Name</th>
+                        <th>Signed Dates</th>
+                        <th>Billing Date</th>
+                        <th>MRC</th>
+                        <th>Term(Months)</th>
+                        <th>Supplier</th>
+                        <th>Company</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contract of contractData  | paginate : {
+                            itemsPerPage: pageSize,
+                            currentPage: page,
+                            totalItems: count
+                        };let i=index;" class="text-center hov" (click)="goToUpdatePage(contract.id)">
+                        <td > {{contract.name}}</td>
+                        <td > {{contract.signeddate ==
+                                undefined ? "-" : contract.signeddate}}</td>
+                        <td > {{contract.billingdate ==
+                                undefined ? "-" : contract.billingdate}}</td>
+                        <td > $ {{contract.mrc}}</td>
+                        <td > {{contract.term}}</td>
+                        <td > {{contract.supplier ==
+                                undefined ? "-" : contract.supplier.name}}</td>
+                        <td > {{contract.company ==
+                                undefined ? "-" : contract.company.name}}</td>
+                        
+                        <!-- <td><a  routerLink="/editContract/{{contract.id}}"  class="btn btn-primary" >Update</a></td> -->
+                    </tr>
+                    
+                </tbody>
+
+            </table>
+         </div>
+         <div class="row mt-3" style="display: flex;">
+            <!-- <div class="col-sm-9" style="display: flex;justify-content: flex-start;">
+                   <h5>
+                    showing Items : &nbsp;&nbsp;
+                        <span *ngIf="contractData.length > pageSizes[0]">
+                            <select (change)="handlePageSizeChange($event)">
+                                <option *ngFor="let size of pageSizes" [ngValue]="size">
+                                  {{ size }}
+                                </option>
+                              </select> &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
+                            </span>
+                        <span *ngIf="pageSizes[0] > contractData.length">
+                            {{contractData.length}} &nbsp;&nbsp; of &nbsp;&nbsp; {{contractData.length}}
+                        </span>
+                    
+
+                   </h5>
+            </div> -->
+            <div class="col-sm" style="display: flex;justify-content:flex-end;">
+               <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="handlePageChange($event)">
+               </pagination-controls>
+            </div>
+         </div>
+         
+</div>
+<h3 style="text-align:center;margin: 200px;" *ngIf="contractData.length == 0">
+    No Records
+</h3>
+
+<router-outlet></router-outlet>
+
+
