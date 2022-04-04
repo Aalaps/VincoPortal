@@ -9,11 +9,12 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export default class AppInterceptor implements HttpInterceptor {
-  constructor() { }
+  constructor(  private router: Router, ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
      //////
@@ -37,8 +38,9 @@ export default class AppInterceptor implements HttpInterceptor {
       }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
-          try {
+          try {//debugger
             alert(err.error.message);
+            this.router.navigate(["/logins"])
           } catch (e) {
             alert('An error occurred');
           }

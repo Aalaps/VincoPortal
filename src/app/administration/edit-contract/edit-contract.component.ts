@@ -5,7 +5,10 @@ import { forkJoin } from 'rxjs';
 import { AccountService } from 'src/app/Services/account.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
+import *as FileSaver from 'file-saver';
+import { HttpClient } from '@angular/common/http';
 // import { DOCUMENT } from '@angular/common'; 
+
 declare var test: any;
 @Component({
   selector: 'app-edit-contract',
@@ -31,10 +34,22 @@ export class EditContractComponent implements OnInit {
   public stageData : any;
   public stageData2 : any;
   public stageDataName : any=[];
+  public documentData : any=[];
   contracts!: FormGroup;
   typeselected!: string;
+  getFileName:any;
   userName:any;
-  constructor(private datepipe: DatePipe , private spinnerService: NgxSpinnerService,private route: ActivatedRoute, private _service: AccountService, private router: Router, private fb: FormBuilder) {
+
+
+
+  constructor(private datepipe: DatePipe , 
+              private spinnerService: NgxSpinnerService,
+              private route: ActivatedRoute, 
+              private _service: AccountService, 
+              private router: Router, 
+              private fb: FormBuilder,
+              private http: HttpClient
+              ) {
     this.typeselected = "ball-fussion"
    }
 
@@ -45,6 +60,7 @@ export class EditContractComponent implements OnInit {
     // this.getAllData();
     this.id = this.route.snapshot.params['id'];
       this.ContractListById(this.id);
+
   }
   
 formInit():void{
@@ -163,10 +179,19 @@ formInit():void{
           this.spinnerService.hide();
         },500)
       // //
-    
+    //debugger
       this.updateContractData = result.data;
-
-        console.log(this.updateContractData);
+         this.documentData = this.updateContractData.images;
+         this.documentData.forEach((element:any) => {
+           //debugger
+          //  var find = "http";
+	      	// let i = element.notetext.indexOf(find);
+           if(element.createdon){
+            // var date = element.createdon.toLocaleString().replace('Z', ' ').replace('T', ' ');
+            element.createdon = this.datepipe.transform(element.createdon, 'dd/MM/yyyy');
+           }
+         });
+        console.log(this.documentData);
 
         this.contracts.patchValue(this.updateContractData);
         this.contracts.patchValue({
@@ -334,11 +359,46 @@ formInit():void{
       });
     });
   }
+
   Logout(){
     sessionStorage.clear();
     localStorage.clear();
   this.router.navigate(["/logins"]);
+  }
+
+downLoadFile(data: any) {
+  debugger
+  if(data.filename){
+    debugger
+    let extension = 'application/' + data.filename.substring(data.filename.lastIndexOf('.')+1);
+    let blob:any = new Blob([data.notetext], { type: extension });
+    const url = window.URL.createObjectURL(blob);
+    // window.open(url);
+    //window.location.href = response.url;
+    FileSaver.saveAs(blob, data.filename);
+  }
+  else{
+    let blob:any = new Blob([data.notetext], { type: 'abc.html' });
+    const url = window.URL.createObjectURL(blob);
+    // window.open(url);
+    //window.location.href = response.url;
+    FileSaver.saveAs(blob, 'abc.html');
+  }
+
+  // let blob = new Blob([data], { type: extension});
+ 
+//   this._service.downloadFile(data.notetext).subscribe((response:any)=>{
+// debugger
+//     let blob:any = new Blob([response], { type: extension });
+//     const url = window.URL.createObjectURL(blob);
+//     // window.open(url);
+//     //window.location.href = response.url;
+//     FileSaver.saveAs(blob, data.filename);
+
+//   }), (error: any) => console.log('Error downloading the file')
+
 }
+
 f(){
   new test();
 }

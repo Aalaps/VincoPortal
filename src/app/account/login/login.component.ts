@@ -21,11 +21,12 @@ export class LoginComponent implements OnInit {
   submitLogin(){
     this.spinnerService.show();
    this._service.postLogin(this.loginModel).subscribe((res : any) => {
-
    if(res.data.contact_id != null){
     window.localStorage.setItem("contact_id",res.data.contact_id );
     window.localStorage.setItem("jwtToken", res.data.token);
     window.localStorage.setItem("userName", res.data.firstname);
+    window.localStorage.setItem("email", res.data.email);
+    window.localStorage.setItem("fullName", res.data.firstname + " " + res.data.lastname);
 
           this.router.navigate(["/contractList"]);
       

@@ -12,6 +12,7 @@ declare var test: any;
 
 export class AdministrationComponent implements OnInit {
   f(event:any){
+    // //debugger
     new test(event);
   }
   items: any;
@@ -19,12 +20,16 @@ export class AdministrationComponent implements OnInit {
   public roleManagers:any=[];
   public roleName:any;
   public userName:any;
+  public fullName:any;
+  public email:any;
   public userId:any;
   public i:any;
   public roleBoolean:boolean | undefined;
   constructor(private router:Router) {}
   ngOnInit(){
    this.userName = window.localStorage.getItem("userName");
+   this.fullName = window.localStorage.getItem("fullName");
+   this.email = window.localStorage.getItem("email");
    
   }
 

@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  ContractData, Login } from '../Models/models';
+import {  Login } from '../Models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {  ContractData, Login } from '../Models/models';
 export class AccountService {
 
 constructor(private http : HttpClient) { }
-private _baseURL :string="https://vinco.azurewebsites.net/api/";
+private _baseURL :string=  "https://vinco.azurewebsites.net/api/";
 private _login :string="auth/login";
 private _opportunity :string="opportunity";
 private _contact :string="contact";
@@ -18,6 +18,7 @@ private _getContractList :string="contractsbyuserid";
 private _ownerId :string="systemuser";
 private _contractListById :string="contract";
 private _updateContract :string="contract";
+private _document :string=" ";
 private modals: any[] = [];
 
 // private _administrationUrl :string="http://localhost:51234/api/Administration";
@@ -58,7 +59,6 @@ roleManagers:any;
   }
 
   postUpdateContract(data :any){
-    //
     const _data ={
       "autorenewal":data.autorenewal,
 "billingcontact":data.billingcontact,
@@ -102,70 +102,71 @@ roleManagers:any;
 "strategyforcontract":data.strategyforcontract,
 "id":data.id
   }
-
-  console.log(data);
     return this.http.post(this._baseURL + this._updateContract  , _data);
   }
-
-
-
-  getContractData(){
-    return this.http.get(this._contractURL);
-  }
   
+  getDocumentData(){
+    return this.http.get(this._baseURL + this._document);
+  }
+
+  downloadFile(data:any) {
+    return this.http.get(data);
+  }
+
   postContract(data : any){
-    ////
-    //
     const _data ={
       "autorenewal":data.autorenewal,
-"billingcontact":data.billingcontact,
-"billingdate":data.billingdate,
-"company":data.company,
-"decisionmakercontract":data.decisionmakercontract,
-"decisionprocess":data.decisionprocess,
-"installdate":data.installdate,
-"location":data.location,
-"managedcontract":data.managedcontract,
-"mrc":data.mrc,
-"msa":data.msa,
-"msanoticedates":data.msanoticedates,
-"name":data.name,
-"nrc":data.nrc,
-"ownerid":data.ownerid,
-"po":data.po,
-"porequired":data.porequired,
-"renewaldate":data.renewaldate,
-"signatureprocess":data.signatureprocess,
-"signeddate":data.signeddate,
-"stage":data.stage,
-"supplier":data.supplier,
-"suppliercontact":data.suppliercontact,
-"suppliercontract":data.suppliercontract,
-"techcontract":data.techcontract,
-"technicalcontact":data.technicalcontact,
-"techtype":data.techtype,
-"term":data.term,
-"yearlyspend":data.yearlyspend,
-"firstrenewalnotificationdate":data.firstrenewalnotificationdate,
-"firstrenewalnotificationdatesent":data.firstrenewalnotificationdatesent,
-"secondrenewalnotificationdate":data.secondrenewalnotificationdate,
-"secondrenewalnotificationdatesent":data.secondrenewalnotificationdatesent,
-"thirdrenewalnotificationdate":data.thirdrenewalnotificationdate,
-"thirdrenewalnotificationdatesent":data.thirdrenewalnotificationdatesent,
-"decisiondays":data.decisiondays,
-"finaldecisiondate":data.finaldecisiondate,
-"finaldecisiondatesent":data.finaldecisiondatesent,
-"industry":data.industry,
-"strategyforcontract":data.strategyforcontract
+      "billingcontact":data.billingcontact,
+      "billingdate":data.billingdate,
+      "company":data.company,
+      "decisionmakercontract":data.decisionmakercontract,
+      "decisionprocess":data.decisionprocess,
+      "installdate":data.installdate,
+      "location":data.location,
+      "managedcontract":data.managedcontract,
+      "mrc":data.mrc,
+      "msa":data.msa,
+      "msanoticedates":data.msanoticedates,
+      "name":data.name,
+      "nrc":data.nrc,
+      "ownerid":data.ownerid,
+      "po":data.po,
+      "porequired":data.porequired,
+      "renewaldate":data.renewaldate,
+      "signatureprocess":data.signatureprocess,
+      "signeddate":data.signeddate,
+      "stage":data.stage,
+      "supplier":data.supplier,
+      "suppliercontact":data.suppliercontact,
+      "suppliercontract":data.suppliercontract,
+      "techcontract":data.techcontract,
+      "technicalcontact":data.technicalcontact,
+      "techtype":data.techtype,
+      "term":data.term,
+      "yearlyspend":data.yearlyspend,
+      "firstrenewalnotificationdate":data.firstrenewalnotificationdate,
+      "firstrenewalnotificationdatesent":data.firstrenewalnotificationdatesent,
+      "secondrenewalnotificationdate":data.secondrenewalnotificationdate,
+      "secondrenewalnotificationdatesent":data.secondrenewalnotificationdatesent,
+      "thirdrenewalnotificationdate":data.thirdrenewalnotificationdate,
+      "thirdrenewalnotificationdatesent":data.thirdrenewalnotificationdatesent,
+      "decisiondays":data.decisiondays,
+      "finaldecisiondate":data.finaldecisiondate,
+      "finaldecisiondatesent":data.finaldecisiondatesent,
+      "industry":data.industry,
+      "strategyforcontract":data.strategyforcontract
   }
     return this.http.post(this._baseURL + this._updateContract , _data);
   } 
+  getContractData(){
+    return this.http.get(this._contractURL);
+  }
 
   open(id: string) {
     // open modal specified by id
     const modal = this.modals.find(x => x.id === id);
     modal.open();
-}
+  }
 
 }
 
