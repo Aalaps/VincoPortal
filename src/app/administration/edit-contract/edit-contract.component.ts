@@ -5,7 +5,7 @@ import { forkJoin } from 'rxjs';
 import { AccountService } from 'src/app/Services/account.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
-import *as FileSaver from 'file-saver';
+import * as FileSaver from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 // import { DOCUMENT } from '@angular/common'; 
 
