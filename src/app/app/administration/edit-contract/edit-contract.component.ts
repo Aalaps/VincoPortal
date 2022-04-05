@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
@@ -7,6 +7,15 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
 import * as FileSaver from 'file-saver';
 import { HttpClient } from '@angular/common/http';
+// import * as html2canvas from 'html2canvas';
+// import html2canvas from 'html2canvas';
+// import { jsPDF } from "jspdf";
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+// import { htmlToPdfmake } from 'htmlToPdfmake';
+const htmlToPdfmake = require('html-to-pdfmake');
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+
 // import { DOCUMENT } from '@angular/common'; 
 
 declare var test: any;
@@ -16,6 +25,8 @@ declare var test: any;
   styleUrls: ['./edit-contract.component.css']
 })
 export class EditContractComponent implements OnInit {
+
+  @ViewChild('content',{static:false}) el!: ElementRef;
 
   public opportunityData: any;
   public opportunityData2: any;
@@ -178,19 +189,16 @@ formInit():void{
         setTimeout(()=>{
           this.spinnerService.hide();
         },500)
-      // //
-    //debugger
       this.updateContractData = result.data;
-         this.documentData = this.updateContractData.images;
+        let docdata :any = this.updateContractData.images;
+         //debugger
+         this.documentData = docdata.filter( (Z:any)=> Z.notetext && !Z.notetext.includes('<div'));
          this.documentData.forEach((element:any) => {
-           //debugger
-          //  var find = "http";
-	      	// let i = element.notetext.indexOf(find);
-           if(element.createdon){
-            // var date = element.createdon.toLocaleString().replace('Z', ' ').replace('T', ' ');
+          if(element.createdon){
             element.createdon = this.datepipe.transform(element.createdon, 'dd/MM/yyyy');
            }
          });
+
         console.log(this.documentData);
 
         this.contracts.patchValue(this.updateContractData);
@@ -365,39 +373,114 @@ formInit():void{
     localStorage.clear();
   this.router.navigate(["/logins"]);
   }
-
-downLoadFile(data: any) {
-  debugger
-  if(data.filename){
-    debugger
-    let extension = 'application/' + data.filename.substring(data.filename.lastIndexOf('.')+1);
-    let blob:any = new Blob([data.notetext], { type: extension });
-    const url = window.URL.createObjectURL(blob);
-    // window.open(url);
-    //window.location.href = response.url;
-    FileSaver.saveAs(blob, data.filename);
-  }
-  else{
-    let blob:any = new Blob([data.notetext], { type: 'abc.html' });
-    const url = window.URL.createObjectURL(blob);
-    // window.open(url);
-    //window.location.href = response.url;
-    FileSaver.saveAs(blob, 'abc.html');
-  }
-
-  // let blob = new Blob([data], { type: extension});
  
-//   this._service.downloadFile(data.notetext).subscribe((response:any)=>{
-// debugger
-//     let blob:any = new Blob([response], { type: extension });
-//     const url = window.URL.createObjectURL(blob);
-//     // window.open(url);
-//     //window.location.href = response.url;
-//     FileSaver.saveAs(blob, data.filename);
+// downLoadFile(data: any) {
+//   //debugger
+//   if(data.filename){
+//      let extension = 'application/' + data.filename.substring(data.filename.lastIndexOf('.')+1);
+//      let file =  data.filename.split(".")[0];
+//      let blob:any = new Blob([data.notetext], { type: extension });
+//      var html =htmlToPdfmake(data.notetext);
+//      const def = {content:html};
+//      (pdfMake as any).fonts = {
+//       // Default font should still be available
+//       SegoeUI: {
+//           normal: 'Roboto-Regular.ttf',
+//           bold: 'Roboto-Medium.ttf',
+//           italics: 'Roboto-Italic.ttf',
+//           bolditalics: 'Roboto-Italic.ttf'
+//       },
+//       // Make sure you define all 4 components - normal, bold, italics, bolditalics - (even if they all point to the same font file)
+//       TimesNewRoman: {
+//           normal: 'Times-New-Roman-Regular.ttf',
+//           bold: 'Times-New-Roman-Bold.ttf',
+//           italics: 'Times-New-Roman-Italics.ttf',
+//           bolditalics: 'Times-New-Roman-Italics.ttf'
+//       }
+//   };
+//      pdfMake.createPdf(def).open();
+//      pdfMake.createPdf(def).download();
 
-//   }), (error: any) => console.log('Error downloading the file')
+//      //const url = window.URL.createObjectURL(blob);
+//      // window.open(url);
+//      //window.location.href = response.url;
+//     //  FileSaver.saveAs(blob, data.filename);
+//     }
+//     else{
+//       let blob:any = new Blob([data.notetext], { type: 'application/html' });
+//       //const url = window.URL.createObjectURL(blob);
+//       //window.open(url);
+//       //window.location.href = response.url;
+//       FileSaver.saveAs(blob, 'example.html');
+//     }
+//     // document.getElementById('myForm') as HTMLFormElement
 
-}
+//     // let content = "<div id='exportthis' #content>";
+//     // content +="<p>Pranjal</p>";
+//     // content += "</div>";
+//     // console.log(content);
+//     // html2canvas(document.getElementById('exportthis') as HTMLFormElement).then(canvas => {
+//     //   // Few necessary setting options
+       
+//     //   const contentDataURL = canvas.toDataURL('image/png')
+//     //   let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+//     //   var width = pdf.internal.pageSize.getWidth();
+//     //   var height = canvas.height * width / canvas.width;
+//     //   pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height)
+//     //   pdf.save('output.pdf'); // Generated PDF
+//     //   });
+
+
+//     //   html2canvas(content, {
+//     //     onrendered: function (canvas) {
+//     //         var data = canvas.toDataURL();
+//     //         var docDefinition = {
+//     //             content: [{
+//     //                 image: data,
+//     //                 width: 500,
+//     //             }]
+//     //         };
+//     //         pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
+//     //     }
+//     // });
+
+//     // let pdf = new jsPDF('p','pt','a4');
+//     // pdf.html(this.el.nativeElement,{
+//     //   callback:(pdf)=>{
+//     //     pdf.save("Demo.pdf");
+//     //   }
+//     // });
+
+//     //   html2canvas(document.getElementById('exportthis') as HTMLFormElement, {
+//     //     onrendered: function (canvas) {
+//     //         var data = canvas.toDataURL();
+//     //         var docDefinition = {
+//     //             content: [{
+//     //                 image: data,
+//     //                 width: 500,
+//     //             }]
+//     //         };
+//     //         pdfMake.createPdf(docDefinition).download("Score_Details.pdf");
+//     //     }
+//     // });
+
+  
+  
+
+
+//   // let blob = new Blob([data], { type: extension});
+ 
+// //   this._service.downloadFile(data.notetext).subscribe((response:any)=>{
+// // //debugger
+// //     let blob:any = new Blob([response], { type: extension });
+// //     const url = window.URL.createObjectURL(blob);
+// //     // window.open(url);
+// //     //window.location.href = response.url;
+// //     FileSaver.saveAs(blob, data.filename);
+
+// //   }), (error: any) => console.log('Error downloading the file')
+
+// }
 
 f(){
   new test();

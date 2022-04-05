@@ -523,16 +523,15 @@
             </thead>
             <tbody>
                 <tr *ngFor="let document of documentData" >
-                        <td><div *ngIf="document.notetext"> {{document.filename ? document.filename  :"-"}}  </div></td>
-                        <td> <div *ngIf="document.notetext"> {{document.createdon ? document.createdon:"-"}} </div></td>
-                        <td><div *ngIf="document.notetext">
-                            <a target="_self" [href]="document.notetext" (click)="downLoadFile(document)" [download]="document.filename">
+                        <td> {{document.filename ? document.filename  :"-"}}  </td>
+                        <td>  {{document.createdon ? document.createdon:"-"}} </td>
+                        <td>
+                            <a target="_blank" [href]="document.notetext" [download]="document.filename">
                                 <img src="https://cdn-icons-png.flaticon.com/512/3580/3580085.png" width="16px">
                               </a>
-                            </div>
-                        </td>
+                            
+                    </td>
                 </tr>
-                
             </tbody>
 
         </table>
@@ -541,6 +540,7 @@
 </div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 
 
 

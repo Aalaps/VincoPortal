@@ -12,7 +12,7 @@ declare var test: any;
 
 export class AdministrationComponent implements OnInit {
   f(event:any){
-    // //debugger
+    // ////debugger
     new test(event);
   }
   items: any;

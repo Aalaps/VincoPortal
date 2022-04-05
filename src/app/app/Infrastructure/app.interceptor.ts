@@ -38,11 +38,12 @@ export default class AppInterceptor implements HttpInterceptor {
       }),
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse) {
-          try {//debugger
+          try {////debugger
             alert(err.error.message);
             this.router.navigate(["/logins"])
           } catch (e) {
-            alert('An error occurred');
+            alert(e);
+            this.router.navigate(["/logins"])
           }
           // log error
         }

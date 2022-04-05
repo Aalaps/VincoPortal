@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Login } from '../Models/models';
+import GlobalSettings  from '../Services/GlobalSettings';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import {  Login } from '../Models/models';
 export class AccountService {
 
 constructor(private http : HttpClient) { }
-private _baseURL :string=  "https://vinco.azurewebsites.net/api/";
+// private _baseURL :string=  "https://vinco.azurewebsites.net/api/";
+public _baseURL:string = GlobalSettings.BaseUrl;
 private _login :string="auth/login";
 private _opportunity :string="opportunity";
 private _contact :string="contact";
@@ -32,6 +34,7 @@ roleManagers:any;
 
 //#region  administration
   postLogin(login : Login){
+    //debugger
     return this.http.post(this._baseURL + this._login,login);
   }
   
