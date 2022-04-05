@@ -10,11 +10,11 @@ import { HttpClient } from '@angular/common/http';
 // import * as html2canvas from 'html2canvas';
 // import html2canvas from 'html2canvas';
 // import { jsPDF } from "jspdf";
-import * as pdfMake from 'pdfmake/build/pdfmake.js';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+// import * as pdfMake from 'pdfmake/build/pdfmake.js';
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 // import { htmlToPdfmake } from 'htmlToPdfmake';
-const htmlToPdfmake = require('html-to-pdfmake');
-(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+// const htmlToPdfmake = require('html-to-pdfmake');
+// (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 // import { DOCUMENT } from '@angular/common'; 
 
